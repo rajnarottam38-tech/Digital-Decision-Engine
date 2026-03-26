@@ -22,6 +22,10 @@ It uses modular JavaScript engines to simulate intelligent decision-making.
 💡 Modular architecture (easy to extend)
 💻 Clean UI with multiple panels
 🏗️ Project Structure
+
+
+
+
 digital-decision-engine/
 │
 ├── index.html                 # Entry point
@@ -53,7 +57,11 @@ digital-decision-engine/
 │       └── utils/
 │           ├── math.js
 │           └── storage.js
+
+
+
 ⚙️ How It Works
+
 User enters decision options in Input Panel
 Assigns weights using Weight Panel
 System processes data using:
@@ -62,11 +70,15 @@ riskEngine.js
 confidenceEngine.js
 Results are ranked using rankingEngine.js
 Output displayed in Result Panel + Charts
+
+
 ▶️ How to Run
 ✅ Method 1: Direct Run
 Extract the project
 Open folder
 Double-click index.html
+
+
 ✅ Method 2: VS Code (Recommended)
 Open project in VS Code
 Install Live Server Extension
@@ -94,12 +106,16 @@ Input Panel → Add decision options
 Weight Panel → Assign importance
 Result Panel → Display ranked output
 Chart Panel → Visual representation
+
+
 📌 Use Cases
 Career selection
 Product comparison
 Business strategy decisions
 Investment choices
 Personal decision-making
+
+
 🔮 Future Enhancements
 🔗 Backend integration (FastAPI / Node.js)
 💾 Database storage
