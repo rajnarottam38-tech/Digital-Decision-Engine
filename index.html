@@ -2,44 +2,96 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Digital Decision Engine</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
 
-<h1>Digital Decision Engine</h1>
+  <header>
+    <div class="logo">⚡ Decision Engine</div>
+    <p class="subtitle">Score and rank your options with weighted criteria</p>
+  </header>
 
-<div class="panel">
-  <h2>Add Option</h2>
+  <main>
 
-  <input id="name" placeholder="Option Name">
+    <!-- Add Option Panel -->
+    <section class="card" id="inputSection">
+      <h2>Add an Option</h2>
+      <div class="input-grid">
+        <div class="input-group full-width">
+          <label for="name">Option Name</label>
+          <input id="name" type="text" placeholder="e.g. Strategy A">
+        </div>
+        <div class="input-group">
+          <label for="cost">Cost <span class="hint">(1–10)</span></label>
+          <input id="cost" type="number" min="1" max="10" placeholder="1–10">
+        </div>
+        <div class="input-group">
+          <label for="growth">Growth <span class="hint">(1–10)</span></label>
+          <input id="growth" type="number" min="1" max="10" placeholder="1–10">
+        </div>
+        <div class="input-group">
+          <label for="risk">Risk <span class="hint">(1–10)</span></label>
+          <input id="risk" type="number" min="1" max="10" placeholder="1–10">
+        </div>
+        <div class="input-group">
+          <label for="time">Time <span class="hint">(1–10)</span></label>
+          <input id="time" type="number" min="1" max="10" placeholder="1–10">
+        </div>
+        <div class="input-group">
+          <label for="stability">Stability <span class="hint">(1–10)</span></label>
+          <input id="stability" type="number" min="1" max="10" placeholder="1–10">
+        </div>
+      </div>
+      <button onclick="addOption()">+ Add Option</button>
 
-  <input type="number" id="cost" placeholder="Cost">
-  <input type="number" id="growth" placeholder="Growth">
-  <input type="number" id="risk" placeholder="Risk">
-  <input type="number" id="time" placeholder="Time">
-  <input type="number" id="stability" placeholder="Stability">
+      <div id="optionsList" class="options-list"></div>
+    </section>
 
-  <button onclick="addOption()">Add Option</button>
-</div>
+    <!-- Weights Panel -->
+    <section class="card" id="weightsSection">
+      <h2>Criteria Weights</h2>
+      <p class="section-hint">Adjust how much each factor matters in the final score.</p>
+      <div class="sliders">
+        <div class="slider-row">
+          <label>Cost</label>
+          <input type="range" id="wCost" min="0" max="1" step="0.05" value="0.2" oninput="updateLabel(this,'lCost')">
+          <span class="slider-val" id="lCost">0.20</span>
+        </div>
+        <div class="slider-row">
+          <label>Growth</label>
+          <input type="range" id="wGrowth" min="0" max="1" step="0.05" value="0.3" oninput="updateLabel(this,'lGrowth')">
+          <span class="slider-val" id="lGrowth">0.30</span>
+        </div>
+        <div class="slider-row">
+          <label>Risk</label>
+          <input type="range" id="wRisk" min="0" max="1" step="0.05" value="0.15" oninput="updateLabel(this,'lRisk')">
+          <span class="slider-val" id="lRisk">0.15</span>
+        </div>
+        <div class="slider-row">
+          <label>Time</label>
+          <input type="range" id="wTime" min="0" max="1" step="0.05" value="0.15" oninput="updateLabel(this,'lTime')">
+          <span class="slider-val" id="lTime">0.15</span>
+        </div>
+        <div class="slider-row">
+          <label>Stability</label>
+          <input type="range" id="wStability" min="0" max="1" step="0.05" value="0.2" oninput="updateLabel(this,'lStability')">
+          <span class="slider-val" id="lStability">0.20</span>
+        </div>
+      </div>
+      <button class="btn-primary" onclick="calculate()">Calculate Decision</button>
+    </section>
 
-<div class="panel">
-  <h2>Criteria Importance</h2>
+    <!-- Results Panel -->
+    <section class="card" id="resultsSection">
+      <h2>Results</h2>
+      <div id="resultEmpty" class="empty-state">Add options above, then click Calculate.</div>
+      <ul id="result" class="results-list"></ul>
+    </section>
 
-  Cost: <input type="range" id="wCost" min="0" max="1" step="0.05" value="0.2"><br>
-  Growth: <input type="range" id="wGrowth" min="0" max="1" step="0.05" value="0.3"><br>
-  Risk: <input type="range" id="wRisk" min="0" max="1" step="0.05" value="0.15"><br>
-  Time: <input type="range" id="wTime" min="0" max="1" step="0.05" value="0.15"><br>
-  Stability: <input type="range" id="wStability" min="0" max="1" step="0.05" value="0.2">
-</div>
+  </main>
 
-<button onclick="calculate()">Calculate Decision</button>
-
-<div class="panel">
-  <h2>Results</h2>
-  <ul id="result"></ul>
-</div>
-
-<script src="app.js"></script>
+  <script src="app.js"></script>
 </body>
 </html>
