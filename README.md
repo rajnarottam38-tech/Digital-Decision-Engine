@@ -4,7 +4,7 @@ A clean, dark-themed web app that helps you score and rank decision options usin
 
 ## 🖥️ Live Demo
 
-[https://rajnarottam38-tech.github.io/digital-decision-engine](https://rajnarottam38-tech.github.io/digital-decision-engine)
+[https://incomparable-buttercream-a3d516.netlify.app](https://incomparable-buttercream-a3d516.netlify.app)
 
 ## ✨ What It Does
 
