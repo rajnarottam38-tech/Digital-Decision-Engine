@@ -1,121 +1,58 @@
-🚀 Digital Decision Engine
+# ⚡ Digital Decision Engine
 
-A lightweight web-based decision-making system that helps users evaluate multiple options using scoring, ranking, risk, and confidence analysis.
+A clean, dark-themed web app that helps you score and rank decision options using weighted criteria — no backend, no build step, just open and use.
 
-📌 Overview
+## 🖥️ Live Demo
 
-The Digital Decision Engine is a frontend-based application that allows users to:
+[https://rajnarottam38-tech.github.io/digital-decision-engine](https://rajnarottam38-tech.github.io/digital-decision-engine)
 
-Define decision options
-Assign weights to criteria
-Calculate scores dynamically
-Analyze risk and confidence
-View ranked results
+## ✨ What It Does
 
-It uses modular JavaScript engines to simulate intelligent decision-making.
+- Add multiple options with 5 scored attributes (Cost, Growth, Risk, Time, Stability)
+- Adjust how much each factor matters using live sliders
+- Hit Calculate — options are ranked by score with visual progress bars
+- Top result gets highlighted with a 🏆 trophy
 
-✨ Features
-📊 Weighted scoring system
-📈 Option ranking engine
-⚠️ Risk evaluation module
-🎯 Confidence calculation
-💡 Modular architecture (easy to extend)
-💻 Clean UI with multiple panels
+## 🧮 Score Formula
 
+```
+score = (cost × w) + (growth × w) - (risk × w) + (time × w) + (stability × w)
+```
 
-🏗️ Project Structure
+> Risk is subtracted — higher risk lowers the score.
 
+## 🗂️ Project Structure
 
+```
 digital-decision-engine/
-│
-├── index.html                 # Entry point
-├── app.js                     # Main controller logic
-│
-├── styles/
-│   ├── main.css              # Global styling
-│
-│   ├── core/                 # Decision engines
-│   │   ├── scoringEngine.js
-│   │   ├── rankingEngine.js
-│   │   ├── riskEngine.js
-│   │   ├── confidenceEngine.js
-│   │   └── data/
-│   │       └── decisionModel.js
-│
-│   ├── pages/                # Application pages
-│   │   ├── builder.html
-│   │   ├── results.html
-│   │   └── components/
-│   │       ├── layout.js
-│   │       └── navbar.js
-│
-│   └── ui/                   # UI components
-│       ├── inputPanel.js
-│       ├── resultPanel.js
-│       ├── WeightPanel.js
-│       ├── chartpanel.js
-│       └── utils/
-│           ├── math.js
-│           └── storage.js
+├── index.html           # Main UI
+├── app.js               # Logic (add options, calculate, render results)
+└── styles/
+    ├── main.css         # Dark theme styles
+    ├── core/            # Scoring, ranking, risk, confidence engines
+    ├── pages/           # Builder & results pages
+    └── ui/              # Modular UI components
+```
 
+## ▶️ How to Run
 
+**Option 1 — Python**
+```bash
+python -m http.server 8080 --bind 127.0.0.1
+```
+Then open `http://127.0.0.1:8080`
 
-⚙️ How It Works
+**Option 2 — VS Code Live Server**
+Right-click `index.html` → Open with Live Server
 
-User enters decision options in Input Panel
-Assigns weights using Weight Panel
-System processes data using:
-scoringEngine.js
-riskEngine.js
-confidenceEngine.js
-Results are ranked using rankingEngine.js
-Output displayed in Result Panel + Charts
+**Option 3 — Node**
+```bash
+npx serve .
+```
 
-▶️ How to Run
-✅ Method 1: Direct Run
-Extract the project
-Open folder
-Double-click index.html
+## 🔮 Planned
 
-✅ Method 2: VS Code (Recommended)
-Open project in VS Code
-Install Live Server Extension
-Right-click index.html
-Click "Open with Live Server"
-
-🧠 Core Modules Explained
-🔹 Scoring Engine
-
-Calculates weighted scores for each decision option.
-
-🔹 Ranking Engine
-
-Sorts options based on calculated scores.
-
-🔹 Risk Engine
-
-Evaluates uncertainty or variability in decisions.
-
-🔹 Confidence Engine
-
-Determines reliability of the final result.
-
-📊 UI Components
-Input Panel → Add decision options
-Weight Panel → Assign importance
-Result Panel → Display ranked output
-Chart Panel → Visual representation
-
-📌 Use Cases
-Career selection
-Product comparison
-Business strategy decisions
-Investment choices
-Personal decision-making
-
-🔮 Future Enhancements
-🔗 Backend integration (FastAPI / Node.js)
-💾 Database storage
-👤 User authentication
-📤 Export results (PDF/Excel)
-🤖 AI-based recommendations
+- AI-based recommendations
+- Export results to PDF/Excel
+- Backend integration (FastAPI / Node.js)
+- User authentication & saved sessions
