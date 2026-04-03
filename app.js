@@ -14,7 +14,7 @@ function addOption() {
   const risk   = +document.getElementById("risk").value;
   const stability = +document.getElementById("stability").value;
 
-  if (!cost || cost < 1 || cost > 10)         return shake(document.getElementById("cost"));
+  if (!cost || cost <= 0)                      return shake(document.getElementById("cost"));
   if (growth === "" || growth < 0 || growth > 100) return shake(document.getElementById("growth"));
   if (!risk)                                   return shake(document.getElementById("risk"));
   if (!time || time < 0.5 || time > 30)        return shake(document.getElementById("time"));
@@ -25,8 +25,9 @@ function addOption() {
   const option = {
     name,
     cost,
-    growth,           // raw %
-    growthNorm: growth / 10,  // normalized to ~0-10 scale
+    costNorm: Math.min(10, cost / 1000),  // normalize: e.g. 5000 → 5, capped at 10
+    growth,
+    growthNorm: growth / 10,
     risk,
     riskLabel: riskLabel[risk],
     time,
@@ -49,7 +50,7 @@ function renderOptionTag(option) {
   div.innerHTML = `
     <span class="tag-name">${option.name}</span>
     <span class="tag-scores">
-      Cost ${option.cost} · Growth ${option.growth}% · Risk ${option.riskLabel} · Time ${option.time}yr · Stability ${option.stability}
+      Cost $${option.cost.toLocaleString()} · Growth ${option.growth}% · Risk ${option.riskLabel} · Time ${option.time}yr · Stability ${option.stability}
     </span>
   `;
   list.appendChild(div);
@@ -76,7 +77,7 @@ function calculate() {
   const results = options.map(opt => ({
     name: opt.name,
     riskLabel: opt.riskLabel,
-    score: opt.cost * weights.cost +
+    score: opt.costNorm * weights.cost +
            opt.growthNorm * weights.growth -
            opt.risk * weights.risk +
            opt.timeNorm * weights.time +
