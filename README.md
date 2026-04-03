@@ -58,19 +58,14 @@ After calculating, the engine automatically analyzes results and shows:
 
 ```
 digital-decision-engine/
-├── index.html                  # Main UI
-├── app.js                      # Frontend logic + AI engine
-├── styles/
-│   ├── main.css                # Dark theme styles
-│   ├── core/                   # Scoring, ranking, risk, confidence engines
-│   ├── pages/                  # Builder & results pages
-│   └── ui/
-│       ├── inputpanel.js
-│       ├── resultpanel.js
-│       ├── weightpanel.js
-│       └── backend/
-│           ├── app.py          # FastAPI backend
-│           └── requirements.txt
+├── index.html              # UI — all panels (input, weights, results, session)
+├── app.js                  # All logic — scoring, AI recommendations, session API
+└── styles/
+    ├── main.css            # Dark theme, layout, components
+    └── ui/
+        └── backend/
+            ├── app.py      # FastAPI — save/load sessions
+            └── requirements.txt
 ```
 
 ---
