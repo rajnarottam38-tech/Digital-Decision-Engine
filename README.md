@@ -16,10 +16,14 @@ A clean, dark-themed web app that helps you score and rank decision options usin
 ## 🧮 Score Formula
 
 ```
-score = (cost × w) + (growth × w) - (risk × w) + (time × w) + (stability × w)
+score = (cost_normalized × w) + (growth% / 10 × w) - (risk × w) + (time_score × w) + (stability × w)
 ```
 
-> Risk is subtracted — higher risk lowers the score.
+- Cost → any positive amount (e.g. $50,000), normalized internally
+- Growth → percentage (0–100%)
+- Risk → Low (2) / Medium (5) / High (8) / Critical (10) — subtracted from score
+- Time → in years (0.5–30), shorter = better score
+- Stability → 1–10 scale
 
 ## 🗂️ Project Structure
 
