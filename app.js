@@ -110,6 +110,7 @@ function calculate() {
     ul.appendChild(li);
   });
 
+  renderAIRecommendation(results, options);
   document.getElementById("resultsSection").scrollIntoView({ behavior: "smooth" });
 }
 
@@ -118,4 +119,93 @@ function shake(el) {
   el.offsetHeight; // reflow
   el.style.animation = "shake 0.3s ease";
   el.addEventListener("animationend", () => el.style.animation = "", { once: true });
+}
+
+// ── AI Recommendation Engine ──
+function renderAIRecommendation(results, rawOptions) {
+  const existing = document.getElementById("aiBox");
+  if (existing) existing.remove();
+
+  const top = results[0];
+  const topRaw = rawOptions.find(o => o.name === top.name);
+  const insights = [];
+
+  // Score gap analysis
+  if (results.length > 1) {
+    const gap = ((top.score - results[1].score) / top.score * 100).toFixed(0);
+    insights.push(gap > 20
+      ? `<strong>${top.name}</strong> is the clear winner with a ${gap}% score lead.`
+      : `<strong>${top.name}</strong> edges out <strong>${results[1].name}</strong> by only ${gap}% — a close call.`
+    );
+  }
+
+  // Risk warning
+  if (topRaw.riskLabel === "Critical" || topRaw.riskLabel === "High")
+    insights.push(`⚠️ Top option carries <strong>${topRaw.riskLabel}</strong> risk — consider a risk mitigation plan before proceeding.`);
+
+  // Growth insight
+  if (topRaw.growth >= 50)
+    insights.push(`📈 Growth potential of <strong>${topRaw.growth}%</strong> is strong — good long-term pick.`);
+  else if (topRaw.growth < 20)
+    insights.push(`📉 Growth is only <strong>${topRaw.growth}%</strong> — may not be ideal if scaling is a priority.`);
+
+  // Time insight
+  if (topRaw.time > 10)
+    insights.push(`⏳ Expected timeline of <strong>${topRaw.time} years</strong> is long — ensure resources are sustainable.`);
+  else if (topRaw.time <= 2)
+    insights.push(`⚡ Quick turnaround of <strong>${topRaw.time} year(s)</strong> — good for fast ROI.`);
+
+  // Low score warning
+  if (top.score < 1)
+    insights.push(`🔍 All scores are low — consider revisiting your weights or option values.`);
+
+  const box = document.createElement("div");
+  box.id = "aiBox";
+  box.className = "ai-box";
+  box.innerHTML = `
+    <div class="ai-header">🤖 AI Recommendation</div>
+    <ul class="ai-insights">${insights.map(i => `<li>${i}</li>`).join("")}</ul>
+  `;
+  document.getElementById("resultsSection").appendChild(box);
+}
+
+// ── Backend Session API ──
+const API = "http://127.0.0.1:8000";
+
+async function saveSession() {
+  const id = document.getElementById("sessionId").value.trim();
+  if (!id) return document.getElementById("sessionMsg").textContent = "Enter a session name.";
+  if (options.length === 0) return document.getElementById("sessionMsg").textContent = "No options to save.";
+
+  const res = await fetch(`${API}/save`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ session_id: id, options })
+  });
+  const data = await res.json();
+  document.getElementById("sessionMsg").textContent = data.status === "saved"
+    ? `✅ Session "${id}" saved.`
+    : "❌ Save failed.";
+}
+
+async function loadSession() {
+  const id = document.getElementById("sessionId").value.trim();
+  if (!id) return document.getElementById("sessionMsg").textContent = "Enter a session name.";
+
+  const res = await fetch(`${API}/load/${id}`);
+  const data = await res.json();
+
+  if (data.error) return document.getElementById("sessionMsg").textContent = `❌ ${data.error}`;
+
+  options = data.options.map(o => ({
+    ...o,
+    costNorm: Math.min(10, o.cost / 1000),
+    growthNorm: o.growth / 10,
+    riskLabel: { 2: "Low", 5: "Medium", 8: "High", 10: "Critical" }[o.risk] || "Medium",
+    timeNorm: Math.max(1, 10 - o.time * 0.3)
+  }));
+
+  document.getElementById("optionsList").innerHTML = "";
+  options.forEach(renderOptionTag);
+  document.getElementById("sessionMsg").textContent = `✅ Session "${id}" loaded with ${options.length} option(s).`;
 }

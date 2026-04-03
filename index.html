@@ -89,6 +89,23 @@
       <button class="btn-primary" onclick="calculate()">Calculate Decision</button>
     </section>
 
+    <!-- Save / Load Session -->
+    <section class="card" id="sessionSection">
+      <h2>💾 Save / Load Session</h2>
+      <p class="section-hint">Save your options to the backend and reload them later.</p>
+      <div class="input-grid">
+        <div class="input-group full-width">
+          <label for="sessionId">Session Name</label>
+          <input id="sessionId" type="text" placeholder="e.g. my-strategy-2026">
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;">
+        <button onclick="saveSession()">💾 Save Session</button>
+        <button onclick="loadSession()" style="background:#0f766e;">📂 Load Session</button>
+      </div>
+      <div id="sessionMsg" class="section-hint" style="margin-top:10px;"></div>
+    </section>
+
     <!-- Results Panel -->
     <section class="card" id="resultsSection">
       <h2>Results</h2>

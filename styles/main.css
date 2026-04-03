@@ -369,3 +369,35 @@ select:focus {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
+
+/* ── AI Recommendation Box ── */
+.ai-box {
+  margin-top: 20px;
+  background: linear-gradient(135deg, #1e1a2e, #1a1d27);
+  border: 1px solid #4f46e5;
+  border-radius: 10px;
+  padding: 18px 20px;
+}
+
+.ai-header {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #a5b4fc;
+  margin-bottom: 10px;
+  letter-spacing: 0.03em;
+}
+
+.ai-insights {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.ai-insights li {
+  font-size: 0.88rem;
+  color: var(--text);
+  padding-left: 10px;
+  border-left: 2px solid #6366f1;
+  line-height: 1.5;
+}
