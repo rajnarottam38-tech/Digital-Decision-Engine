@@ -202,10 +202,3 @@ Contributions are welcome! To get started:
 
 ---
 
-<div align="center">
-
-Made with ❤️ by [rajnarottam38-tech](https://github.com/rajnarottam38-tech)
-
-[![Visitors](https://visitor-badge.laobi.icu/badge?page_id=rajnarottam38-tech.digital-decision-engine)](https://github.com/rajnarottam38-tech/digital-decision-engine)
-
-</div>
