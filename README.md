@@ -7,7 +7,6 @@
 
 [![Live Demo](https://img.shields.io/badge/🚀_Live_Demo-Netlify-6366f1?style=for-the-badge&logo=netlify&logoColor=white)](https://incomparable-buttercream-a3d516.netlify.app)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-181717?style=for-the-badge&logo=github)](https://github.com/rajnarottam38-tech/digital-decision-engine)
-[![Made With JS](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
 [![FastAPI](https://img.shields.io/badge/Python-FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com/)
 
 <br/>
